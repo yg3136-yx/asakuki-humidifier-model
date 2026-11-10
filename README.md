@@ -10,6 +10,10 @@ constraints.
 
 [Open the interactive model](https://asakuki-humidifier-model.yixin4356.chatgpt.site)
 
+## AI collaboration transcript
+
+[View the November 9 design and development transcript](docs/ASAKUKI_Humidifier_AI_Collaboration_Transcript_2026-11-09.pdf)
+
 ## Main interactions
 
 ### Mist control and accelerated timer
@@ -126,4 +130,3 @@ The tests cover:
 - Confirm whether a new mist session automatically turns on a default light.
 - Refine double-click and long-press timing through usability testing.
 - Add gradual water-level simulation or additional appliance feedback.
-
