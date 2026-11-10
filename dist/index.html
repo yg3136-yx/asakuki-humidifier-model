@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive computational model of an ASAKUKI humidifier."
+    />
+    <title>ASAKUKI Humidifier Model</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="intro">
+        <p class="eyebrow">Theory &amp; Programming of Interactive Media</p>
+        <div class="intro-row">
+          <div>
+            <h1>Humidifier <span>interaction model</span></h1>
+            <p class="lede">
+              A first prototype for testing how physical controls become states,
+              variables, guarded actions, and automatic transitions.
+            </p>
+          </div>
+          <div class="status-pill" id="main-state-pill" aria-live="polite">
+            <span class="status-dot"></span>
+            <span id="main-state">Idle</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="prototype-grid" aria-label="Interactive humidifier prototype">
+        <article class="device-panel">
+          <div class="device-stage">
+            <div class="mist-cloud" id="mist-cloud" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </div>
+
+            <div class="humidifier" id="humidifier" aria-label="Humidifier visualization">
+              <div class="tank">
+                <div class="tank-shine"></div>
+                <div class="water" id="water"></div>
+                <div class="empty-mark" id="empty-mark">!</div>
+              </div>
+              <div class="device-base">
+                <div class="light-ring" id="light-ring"></div>
+                <div class="brand">ASAKUKI</div>
+                <div class="device-led" id="device-led"></div>
+              </div>
+            </div>
+
+            <div class="device-caption" id="device-caption" aria-live="polite">
+              Ready. Press MIST to begin.
+            </div>
+          </div>
+
+          <div class="readout" aria-label="Current model variables">
+            <div class="readout-item">
+              <span>Mist program</span>
+              <strong id="mist-mode">Off</strong>
+            </div>
+            <div class="readout-item">
+              <span>Intensity</span>
+              <strong id="intensity">High (default)</strong>
+            </div>
+            <div class="readout-item">
+              <span>Light</span>
+              <strong id="light-mode">Off</strong>
+            </div>
+            <div class="readout-item timer-readout">
+              <span>Accelerated timer</span>
+              <strong id="timer-display">—</strong>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar" id="timer-progress"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls" aria-label="Physical controls">
+            <button class="control-button mist-button" id="mist-button" type="button">
+              <span class="button-icon">≈</span>
+              <span>MIST</span>
+              <small>press to advance mode</small>
+            </button>
+            <button class="control-button" id="intensity-button" type="button" disabled>
+              <span class="button-icon">↕</span>
+              <span>HIGH / LOW</span>
+              <small>works only while misting</small>
+            </button>
+            <button class="control-button light-button" id="light-button" type="button" disabled>
+              <span class="button-icon">✦</span>
+              <span>LIGHT</span>
+              <small>double-tap · hold to turn off</small>
+            </button>
+          </div>
+        </article>
+
+        <aside class="model-panel">
+          <section class="panel-card tank-card">
+            <div>
+              <p class="card-label">Environment input</p>
+              <h2>Water tank</h2>
+              <p id="water-description">Water is available.</p>
+            </div>
+            <button class="secondary-button danger" id="water-button" type="button">
+              Simulate empty tank
+            </button>
+          </section>
+
+          <section class="panel-card">
+            <div class="card-heading">
+              <div>
+                <p class="card-label">Transition trace</p>
+                <h2>Recent events</h2>
+              </div>
+              <button class="text-button" id="clear-log" type="button">Clear</button>
+            </div>
+            <ol class="event-log" id="event-log" aria-live="polite"></ol>
+          </section>
+
+          <section class="panel-card assumptions-card">
+            <p class="card-label">Explicit first-version choices</p>
+            <h2>Model assumptions</h2>
+            <ul>
+              <li>A new mist session starts at <strong>High</strong> intensity.</li>
+              <li><strong>1 simulated minute = 0.25 seconds</strong> in real time.</li>
+              <li>Changing a timed mode restarts the countdown.</li>
+              <li>A new mist session starts with the light off.</li>
+              <li>The LIGHT button works only while mist is active.</li>
+              <li>Refilling returns to Idle; it never restarts mist automatically.</li>
+            </ul>
+          </section>
+        </aside>
+      </section>
+
+      <section class="logic-strip" aria-label="Model logic summary">
+        <div>
+          <span>Mode cycle</span>
+          <strong>Off → Continuous → 30 → 60 → 120 → 180 → Off</strong>
+        </div>
+        <div>
+          <span>Safety rule</span>
+          <strong>Empty tank → mist off + light off + refill required</strong>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
