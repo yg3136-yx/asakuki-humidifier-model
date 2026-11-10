@@ -10,10 +10,6 @@ constraints.
 
 [Open the interactive model](https://asakuki-humidifier-model.yixin4356.chatgpt.site)
 
-## AI collaboration transcript
-
-[View the November 9 design and development transcript](docs/ASAKUKI_Humidifier_AI_Collaboration_Transcript_2026-11-09.pdf)
-
 ## Main interactions
 
 ### Mist control and accelerated timer
